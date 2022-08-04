@@ -107,7 +107,7 @@ void draw_rest(t_mlx *env, int x, int y, int size)
     pos[1][0] = x - cos(get_ord_angle(env->map->c_dir)) * size; 
     pos[1][1] = y + sin(get_ord_angle(env->map->c_dir)) * size; 
     draw_line(env, pos[0], pos[1], encode_rgb(0,127,127));
-    draw_circumf(env, pos[0], size, encode_rgb(150,100,50));
+    draw_circumf(env, pos[0], size, encode_rgb(0,0,0));
 
 }
 
@@ -121,7 +121,7 @@ void draw_map_circle(t_mlx *env, int x, int y, int size)
     pos[0][0] = x;
     pos[0][1] = y;
     i = -1;
-    draw_circle(env, pos[0], size, encode_rgb(250,200,50));
+    draw_circle(env, pos[0], size, encode_rgb(250,255,255));
     while (++i < env->map->n_walls)
     {
         sub_vec(env->map->c_pos, env->map->walls[i][0], tmp[0]);
@@ -136,7 +136,7 @@ void draw_map_circle(t_mlx *env, int x, int y, int size)
             pos[0][1] = y + ft_min_d(v[0][0], size - 2) * sin(v[0][1]);
             pos[1][0] = x + ft_min_d(v[1][0], size - 2) * cos(v[1][1]);
             pos[1][1] = y + ft_min_d(v[1][0], size - 2) * sin(v[1][1]);
-            draw_line(env, pos[0], pos[1], encode_rgb(80,80,80));
+            draw_line(env, pos[0], pos[1], encode_rgb(0,0,0));
         }
     }
     draw_rest(env, x, y, size);

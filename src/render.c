@@ -108,11 +108,11 @@ void draw_col_tex(t_mlx *env, int x, int idx, double *dists)
 	scale =  (HEIGHT / dists[0]);
 	height[0] = (int)((double)(HEIGHT) / 2 - scale / 2);
 	height[1] = (int)((double)(HEIGHT) / 2 + scale / 2);
-	row = 0;
+	row  = 0;
 	step = (env->map->t_w / scale); //* (HEIGHT / env->map->t_w));
 	while (height[0] <= height[1])
 	{
-		color = *((int *)(env->map->textures[idx] + (int)(row)* env->map->t_w) + (int)(dists[1] * env->map->t_w));
+		color = *((int *)(env->map->textures[idx]->data) + (int)(row) * env->map->t_w + (int)(dists[1] * env->map->t_w));
 		set_pixel(env, x, height[0], color);
 		row += step;
 		height[0]++;
@@ -206,19 +206,19 @@ void move(t_mlx *env)
 	}
 }
 
-int	frame(t_render *rend)
+int	frame(t_mlx *env)
 {	
-	if (!collide(rend->env->map, 0.25))
+	if (!collide(env->map, 0.25))
 	{
-		if (rend->env->keys.left || rend->env->keys.right)
-			rotate(rend->env);
-		if (rend->env->keys.w || rend->env->keys.a
-				|| rend->env->keys.s || rend->env->keys.d)
-				move(rend->env);
-		render_background(rend->env);
-		cast_rays(rend->env);
-		draw_map_circle(rend->env, WIDTH - HEIGHT / 8, HEIGHT / 8, HEIGHT / 8);
-		mlx_put_image_to_window(rend->mlx, rend->env->window, rend->env->img, 0, 0);
+		if (env->keys.left || env->keys.right)
+			rotate(env);
+		if (env->keys.w || env->keys.a
+				|| env->keys.s || env->keys.d)
+				move(env);
+		render_background(env);
+		cast_rays(env);
+		draw_map_circle(env, WIDTH - HEIGHT / 8, HEIGHT / 8, HEIGHT / 8);
+		mlx_put_image_to_window(env->mlx, env->window, env->img, 0, 0);
 	}
 	return (0);
 }

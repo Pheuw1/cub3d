@@ -46,19 +46,21 @@ int	exit_mlx(t_mlx *env)
 {
 	int	i;
 
+	if (env->img)
+		mlx_destroy_image(env->mlx, env->img);
+	if (env->window)
+		mlx_destroy_window(env->mlx, env->window);
+	if (env->img)
 	i = -1;
 	while (++i < env->map->m_x)
 		free(env->map->layout[i]);
 	free(env->map->layout);
 	i = -1;
 	while (++i < 4)
-		free(env->map->textures[i]);
-	mlx_destroy_window(env->mlx, env->window);
+		mlx_destroy_image(env->mlx, env->map->textures[i]);
 	free(env->mlx);
-	env->window = NULL;
-	return (0);
+	exit(0);
 }
-
 
 void print_layout(t_map *map)
 {
@@ -73,7 +75,6 @@ void print_layout(t_map *map)
 // mlx_hook(env.window, 6, 1L << 6, hook_mouse_move, &env);
 int	main(int ac, char **av)
 {	
-	void				*mlx;
 	t_mlx				env;
 	t_render			render;
 	t_map				map;
@@ -81,18 +82,18 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		return (ft_error("cub3d", "require config file", -1));
 	env.map = &map;
-	mlx = init_mlx_window(&env, "cub3d");
-	if (!mlx)
+	init_mlx_window(&env, "cub3d");
+	if (!env.mlx)
 		return (-1);
 	if (parse_input(&env, av[1]))
 		return (exit_mlx(&env));
 	convert_map_to_vecs(&map);
-	init_render(&render, mlx, &env);
-	mlx_loop_hook(mlx, frame, &render);
+	init_render(&render, env.mlx, &env);
+	mlx_loop_hook(env.mlx, frame, &env);
 	mlx_hook(env.window, 2, 1L << 0, ft_press, &env);
 	mlx_hook(env.window, 3, 1L << 1, ft_release, &env);
 	mlx_hook(env.window, ON_DESTROY, 0, exit_mlx, &env);
-	mlx_loop(mlx);
+	mlx_loop(env.mlx);
 	exit_mlx(&env);
 	return (0);
 }

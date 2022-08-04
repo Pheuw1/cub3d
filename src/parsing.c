@@ -45,10 +45,10 @@ int	get_color(char *line)
 	return(encode_rgb(vals[0],vals[1],vals[2]));
 }
 
-int *open_texture(t_mlx *env, char *path)
+t_img *open_texture(t_mlx *env, char *path)
 {
 	int i;
-	int *ret;
+	t_img *ret;
 	
 	i = -1;
 	while (path[++i])
@@ -59,14 +59,11 @@ int *open_texture(t_mlx *env, char *path)
 	while (path[++i])
 		if (path[i] == ' ' || path[i] == '\n')
 			break;
-	path = ft_substr(path, 0, i);
-	ret = (int *)((t_img *)mlx_xpm_file_to_image(env->mlx, path, &env->map->t_w, &env->map->t_w))->data;
+	path = ft_substr(path, 0, i);\
+	ret = ((t_img *)mlx_xpm_file_to_image(env->mlx, path, &env->map->t_w, &env->map->t_w));
 	free(path);
 	if (!ret)
-	{
 		env->map->tex_error = 1;
-		return (NULL);
-	}
 	return (ret);
 }
 
@@ -140,7 +137,6 @@ char **cleanup_MakeRect(t_map *map, char *file)
 	char 	*tmp;
 
 	split = ft_split(file, "\n");
-
 	i = -1;
 	while (split && split[++i])
 	{
@@ -239,6 +235,7 @@ int	get_map(t_map *map, char *file)
 	if (is_valid_map_get_sizes(map, file))
 		return (-1);
 	split = cleanup_MakeRect(map, file);
+	free(file);
 	map->layout = (int **)malloc(map->m_x * sizeof(int*));
 	i = -1;
 	while (++i < map->m_x)

@@ -21,6 +21,7 @@
 # include <unistd.h>
 # include "../libft/libft.h"
 #include <mlx_int.h>
+
 # define WIDTH				1000
 # define HEIGHT				1000
 # define K_ESCAPE 			53
@@ -32,7 +33,6 @@
 # define K_A				97
 # define K_S				115
 # define K_D				100
-//
 // # define K_W				13
 // # define K_A				0
 // # define K_S				1
@@ -84,7 +84,7 @@ typedef struct s_map{
 	int			m_x;
 	int			m_y;
 	int			t_w;
-	int			*textures[4];//N S W E
+	t_img		*textures[4];//N S W E
 	int			tex_error;
 	int			floor;
 	int			ceil;
@@ -117,7 +117,7 @@ int		ft_press(int keycode, t_mlx *env);
 int		ft_release(int keycode, t_mlx *env);
 void	set_pixel(t_mlx *env, int w_x, int w_y, int color);
 void	map_to_screen(t_mlx *env, double a, double b, int *res);
-int		frame(t_render *rend);
+int		frame(t_mlx *env);
 void	init_render(t_render *render, void *mlx, t_mlx *env);
 void	init_keys(t_K_data *keys);
 int		encode_rgb(int red, int green, int blue);

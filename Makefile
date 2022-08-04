@@ -4,7 +4,7 @@ SRCS            = $(wildcard src/*.c)
 files           = $(SRCS) $()
 OBJS            = ${files:.c=.o}
 CC              = clang
-CFLAGS          = #-Wall -Wextra -Werror
+CFLAGS          = -Wall -Wextra -Werror
 RM              = rm -rf
 
 all: ${NAME}
