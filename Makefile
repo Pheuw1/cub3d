@@ -26,7 +26,7 @@ fclean: clean
 re: fclean all
 
 norme:
-	norminette -R CheckForbiddenSourceHeader ${wildcard ./src/*/*} ${wildcard ./src/*.c} ${wildcard src/*.h} ${wildcard libft/*.c} ${wildcard libft/*.h}
+	norminette -R CheckForbiddenSourceHeader ${wildcard ./src/*/*.c} ${wildcard ./src/*.c} ${wildcard src/*.h} ${wildcard libft/*.c} ${wildcard libft/*.h}
 
 
 format:

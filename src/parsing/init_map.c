@@ -1,14 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmehdevi <gmehdevi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 14:01:49 by gmehdevi          #+#    #+#             */
-/*   Updated: 2022/06/30 14:21:53 by gmehdevi         ###   ########.fr       */
+/*   Updated: 2022/08/06 20:24:27 by gmehdevi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "../cub3d.h"
 
 void	init_layout(t_map *map)
@@ -94,10 +95,7 @@ int	get_map(t_map *map, char *file)
 	char	**split;
 
 	if (is_valid_map_get_sizes(map, file))
-	{
-		free(file);
 		return (-1);
-	}
 	split = map_makerect(map, file);
 	free(file);
 	init_layout(map);
@@ -105,9 +103,13 @@ int	get_map(t_map *map, char *file)
 	while (split[++i])
 	{
 		j = -1;
-		while (split[i][++j] && ++map->layout[j][i])
+		while (split[i][++j])
+		{
 			if (split[i][j] == '0' || get_camdir_pos(map, split[i][j], i, j))
 				map->layout[j][i] = 0;
+			else
+				map->layout[j][i] = 1;
+		}
 	}
 	ft_freepp((void *)split);
 	if (break_free(map))

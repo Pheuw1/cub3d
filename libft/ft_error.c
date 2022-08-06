@@ -6,7 +6,7 @@
 /*   By: gmehdevi <gmehdevi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 17:17:47 by gmehdevi          #+#    #+#             */
-/*   Updated: 2022/02/24 17:22:56 by gmehdevi         ###   ########.fr       */
+/*   Updated: 2022/08/06 20:31:03 by gmehdevi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_error(char *prog, char *msg, int ret, void *to_free)
 {
-	write(2,"Error\n",6);
+	write(2, "Error\n", 6);
 	free(to_free);
 	write(2, prog, ft_strlen(prog));
 	write(2, " : ", 3);

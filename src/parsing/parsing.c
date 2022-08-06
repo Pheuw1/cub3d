@@ -6,7 +6,7 @@
 /*   By: gmehdevi <gmehdevi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 17:04:48 by gmehdevi          #+#    #+#             */
-/*   Updated: 2022/08/06 17:29:16 by gmehdevi         ###   ########.fr       */
+/*   Updated: 2022/08/06 20:22:21 by gmehdevi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ char	**map_makerect(t_map *map, char *file)
 		{
 			j = -1;
 			while (++j < map->m_x - ft_strlen(split[i]))
-				end[j] = ' ';
+				end[j] = '0';
 			end[j] = 0;
 			tmp = ft_strjoin(split[i], end);
 			free(split[i]);
@@ -128,6 +128,5 @@ int	parse_input(t_mlx *env, char *config)
 		free(line);
 		line = get_next_line(fd);
 	}
-	ft_putstr_fd("bef get_map", 1);
 	return (get_map(env->map, file));
 }

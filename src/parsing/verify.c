@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.c                                           :+:      :+:    :+:   */
+/*   verify.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmehdevi <gmehdevi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:35:51 by gmehdevi          #+#    #+#             */
-/*   Updated: 2022/06/29 17:42:15 by gmehdevi         ###   ########.fr       */
+/*   Updated: 2022/08/06 20:22:26 by gmehdevi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void vec_equal(double *v1, double *v2)
+void	vec_equal(double *v1, double *v2)
 {
 	v1[0] = v2[0];
 	v1[1] = v2[1];
@@ -20,6 +20,10 @@ void vec_equal(double *v1, double *v2)
 
 void	init_map(t_mlx *env)
 {
+	env->map->c_pos[0] = 0.0;
+	env->map->c_pos[1] = 0.0;
+	env->map->c_dir[0] = 0.0;
+	env->map->c_dir[1] = 0.0;
 	env->map->tex_error = 0;
 	env->map->m_y = 0;
 	env->map->n_walls = 0;
@@ -45,16 +49,16 @@ int	is_valid_map_get_sizes(t_map *map, char *file)
 			len = -1;
 		if (file[i] == 'N' || file[i] == 'S' || file[i] == 'W'
 			|| file[i] == 'E')
-			pos = 1;
+			pos++;
 		else if (file[i] == ' ')
 			file[i] = '0';
 		else if (file[i] != '0' && file[i] != '1' && file[i] != '\n')
-			return (ft_error("cub3d", "invalid map format", -1, NULL));
+			return (ft_error("cub3d", "invalid map format", -1, file));
 		len++;
 	}
 	map->m_y++;
-	if (!pos)
-		return (ft_error("cub3d", "invalid map format", -1, NULL));
+	if (pos < 1 || pos > 1)
+		return (ft_error("cub3d", "invalid map format", -1, file));
 	return (0);
 }
 

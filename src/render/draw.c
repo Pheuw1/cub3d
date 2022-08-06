@@ -6,12 +6,11 @@
 /*   By: gmehdevi <gmehdevi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:35:51 by gmehdevi          #+#    #+#             */
-/*   Updated: 2022/08/06 17:30:19 by gmehdevi         ###   ########.fr       */
+/*   Updated: 2022/08/06 20:26:02 by gmehdevi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
 
 int	encode_rgb(int red, int green, int blue)
 {
@@ -44,7 +43,6 @@ void	set_pixel(t_mlx *env, int w_x, int w_y, int color)
 	*(unsigned int *)dst = color;
 }
 
-//dist 0 is how far wall is, dist 1 is coord along texture
 void	draw_col_tex(t_mlx *env, int x, int idx, double *dists)
 {
 	int		color;
@@ -63,7 +61,7 @@ void	draw_col_tex(t_mlx *env, int x, int idx, double *dists)
 	while (height[0] <= height[1])
 	{
 		color = *((int *)(env->map->tex_data[idx])
-				+ (int)(row)*env->map->t_w + (int)(dists[1] * env->map->t_h));//
+				+ (int)(row)*env->map->t_w + (int)(dists[1] * env->map->t_h));
 		set_pixel(env, x, height[0], color);
 		row += step;
 		height[0]++;
