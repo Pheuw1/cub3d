@@ -1,15 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.c                                           :+:      :+:    :+:   */
+/*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmehdevi <gmehdevi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:35:51 by gmehdevi          #+#    #+#             */
-/*   Updated: 2022/06/29 17:42:15 by gmehdevi         ###   ########.fr       */
+/*   Updated: 2022/08/06 17:30:19 by gmehdevi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "../cub3d.h"
+
 
 int	encode_rgb(int red, int green, int blue)
 {
@@ -60,8 +62,8 @@ void	draw_col_tex(t_mlx *env, int x, int idx, double *dists)
 	step = (env->map->t_w / scale);
 	while (height[0] <= height[1])
 	{
-		color = *((int *)(env->map->textures[idx]->data)
-				+ (int)(row)*env->map->t_w + (int)(dists[1] * env->map->t_h));
+		color = *((int *)(env->map->tex_data[idx])
+				+ (int)(row)*env->map->t_w + (int)(dists[1] * env->map->t_h));//
 		set_pixel(env, x, height[0], color);
 		row += step;
 		height[0]++;

@@ -6,62 +6,62 @@
 /*   By: gmehdevi <gmehdevi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 17:13:34 by gmehdevi          #+#    #+#             */
-/*   Updated: 2022/06/30 14:04:12 by gmehdevi         ###   ########.fr       */
+/*   Updated: 2022/08/06 17:23:42 by gmehdevi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
+# include <stdio.h>
 # include "../libft/libft.h"
 # include <complex.h>
 # include <fcntl.h>
 # include <math.h>
 # include <mlx.h>
-# include <mlx_int.h>
 # include <stddef.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <sys/types.h>
+# include <sys/stat.h>
 
 # define WIDTH 1000
 # define HEIGHT 1000
 # define K_ESCAPE 53
 # define N_WALLS 10000
-// linux
-# define K_LEFT 65361
-# define K_RIGHT 65363
-# define K_W 119
-# define K_A 97
-# define K_S 115
-# define K_D 100
-// # define K_W				13
-// # define K_A				0
-// # define K_S				1
-// # define K_D				2
-// # define K_LEFT				123
-// # define K_RIGHT			124
-# define K_NUM_MULT 67
-# define K_NUM_DIV 75
-# define K_NUM_PLUS 69
-# define K_NUM_MINUS 78
-# define K_NUM_ENTER 76
-# define K_NUM_0 82
-# define K_UP 126
-# define K_DOWN 125
-# define K_L 37
-# define LEFT 1
-# define RIGHT 2
-# define MIDDLE 3
-# define SCROLLU 4
-# define SCROLLD 5
-# define ON_DESTROY 17
-# define K_NUM_7 89
-# define K_NUM_9 92
-# define K_NUM_4 86
-# define K_NUM_6 88
-# define K_NUM_1 83
-# define K_NUM_3 85
-# define MOUSE_SCROLL_UP 4
-# define MOUSE_SCROLL_DOWN 5
+// linux	
+# define K_W				13
+# define K_A				0
+# define K_S				1
+# define K_D				2
+# define K_LEFT				123
+# define K_RIGHT			124
+# define K_ESCAPE 			53
+# define MOUSE_SCROLL_UP 	4
+# define MOUSE_SCROLL_DOWN	5
+# define K_NUM_MULT			67
+# define K_NUM_DIV			75
+# define K_NUM_PLUS			69
+# define K_NUM_MINUS		78
+# define K_NUM_ENTER		76
+# define K_NUM_0			82
+# define K_UP				126
+# define K_DOWN				125
+# define K_LEFT				123
+# define K_RIGHT			124
+# define K_DIGIT_1			18
+# define K_L				37
+# define LEFT            	1
+# define RIGHT           	2
+# define MIDDLE          	3
+# define SCROLLU         	4
+# define SCROLLD         	5
+# define ON_DESTROY			17
+# define K_NUM_7			89
+# define K_NUM_9			92
+# define K_NUM_4			86
+# define K_NUM_6			88
+# define K_NUM_1			83
+# define K_NUM_3			85
 
 typedef struct s_K_data
 {
@@ -87,7 +87,8 @@ typedef struct s_map
 	int			m_y;
 	int			t_w;
 	int			t_h;
-	t_img		*textures[4];
+	void		*textures[4];
+	int			*tex_data[4];
 	int			tex_error;
 	int			floor;
 	int			ceil;
@@ -129,7 +130,7 @@ void			set_pixel(t_mlx *env, int w_x, int w_y, int color);
 int				parse_input(t_mlx *env, char *config);
 int				det_cardinals(double wall[2][2]);
 int				get_color(char *line);
-t_img			*open_tex(t_mlx *env, char *path);
+void			*open_tex(t_mlx *env, char *path, int idx);
 int				get_map(t_map *map, char *file);
 int				get_camdir_pos(t_map *map, char card, int i, int j);
 int				is_valid_map_get_sizes(t_map *map, char *file);

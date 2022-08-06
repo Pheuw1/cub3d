@@ -13,7 +13,8 @@ all: ${NAME}
 
 $(NAME): $(OBJS)
 	@$(MAKE) -C ./libft	
-	$(CC) $(OBJS) -Lmlx_linux -L/usr/lib -Imlx_linux  -lX11 -lm -lz -lbsd -lmlx -lXext ./libft/libft.a -o  $(NAME)
+	$(CC) $(OBJS)  -lmlx -framework OpenGL -framework AppKit ./libft/libft.a -o  $(NAME)
+#$(CC) $(OBJS) -Lmlx_linux -L/usr/lib -Imlx_linux  -lm -lz -lbsd -lmlx  ./libft/libft.a -o  $(NAME)
 
 clean:
 	$(MAKE) -C libft fclean

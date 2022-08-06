@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   window.c                                           :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmehdevi <gmehdevi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 18:15:23 by gmehdevi          #+#    #+#             */
-/*   Updated: 2022/06/29 17:45:16 by gmehdevi         ###   ########.fr       */
+/*   Updated: 2022/08/06 18:25:23 by gmehdevi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include <stdio.h>
+
 
 void	*init_mlx_window(t_mlx *env, char *title)
 {
@@ -78,6 +78,16 @@ int	exit_mlx(t_mlx *env)
 	exit(0);
 }
 
+void print_layout(t_map *map)
+{
+	int y,x = -1;
+	while (++y < map->m_y){
+		x = -1;
+		while (++x < map->m_x)
+			ft_printf("|%d|", map->layout[x][y]);}
+}
+
+
 // mlx_hook(env.window, 4, 1L << 2, hook_mouse, &env);
 // mlx_hook(env.window, 6, 1L << 6, hook_mouse_move, &env);
 int	main(int ac, char **av)
@@ -94,6 +104,7 @@ int	main(int ac, char **av)
 	if (parse_input(&env, av[1]))
 		return (exit_mlx(&env));
 	convert_map_to_vecs(&map);
+	print_layout(&map);
 	mlx_loop_hook(env.mlx, frame, &env);
 	mlx_hook(env.window, 2, 1L << 0, ft_press, &env);
 	mlx_hook(env.window, 3, 1L << 1, ft_release, &env);
