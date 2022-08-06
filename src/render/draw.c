@@ -6,7 +6,7 @@
 /*   By: gmehdevi <gmehdevi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:35:51 by gmehdevi          #+#    #+#             */
-/*   Updated: 2022/08/06 20:26:02 by gmehdevi         ###   ########.fr       */
+/*   Updated: 2022/08/06 20:40:57 by gmehdevi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ void	render_background(t_mlx *env)
 	{
 		j = 0;
 		while (++j < (HEIGHT) / 2)
-			set_pixel(env, i, j, env->map->floor);
-		while (++j < (HEIGHT))
 			set_pixel(env, i, j, env->map->ceil);
+		while (++j < (HEIGHT))
+			set_pixel(env, i, j, env->map->floor);
 	}
 }
 

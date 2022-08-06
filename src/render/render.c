@@ -6,7 +6,7 @@
 /*   By: gmehdevi <gmehdevi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:35:51 by gmehdevi          #+#    #+#             */
-/*   Updated: 2022/06/29 17:42:15 by gmehdevi         ###   ########.fr       */
+/*   Updated: 2022/08/06 20:37:08 by gmehdevi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	draw_closest_wall(t_mlx *env, double *ray, int x)
 			dists[1] = tmp[1];
 		}
 	}
-	if (dists[0] > 0)
+	if (dists[0] > 0 && dists[0] < env->map->far)
 		draw_col_tex(env, x, i[1], dists);
 }
 

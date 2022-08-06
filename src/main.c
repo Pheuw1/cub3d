@@ -6,7 +6,7 @@
 /*   By: gmehdevi <gmehdevi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 18:15:23 by gmehdevi          #+#    #+#             */
-/*   Updated: 2022/08/06 20:24:10 by gmehdevi         ###   ########.fr       */
+/*   Updated: 2022/08/06 20:46:56 by gmehdevi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	exit_mlx(t_mlx *env)
 	if (env->window)
 		mlx_destroy_window(env->mlx, env->window);
 	i = -1;
-	while (env->map->layout && ++i < env->map->m_y)
+	while (env->map->layout && ++i < env->map->m_x)
 		free(env->map->layout[i]);
 	if (!env->map->layout)
 		free(env->map->layout);
@@ -54,7 +54,8 @@ int	exit_mlx(t_mlx *env)
 	while (++i < 4)
 		if (env->map->textures[i])
 			mlx_destroy_image(env->mlx, env->map->textures[i]);
-	free(env->mlx);
+	if (env->mlx)
+		free(env->mlx);
 	exit(0);
 }
 
