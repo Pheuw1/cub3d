@@ -9,9 +9,6 @@
 /*   Updated: 2022/06/29 17:06:45 by gmehdevi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <unistd.h>
-#include <stdio.h>
 #include "cub3d.h"
 
 void	init_keys(t_K_data *keys)
@@ -58,4 +55,40 @@ int	ft_release(int keycode, t_mlx *env)
 	if (keycode == K_D)
 		env->keys.d = 0;
 	return (0);
+}
+
+void	rotate(t_mlx *env)
+{
+	if (env->keys.left)
+		rot_vec(env->map->c_dir, M_PI / 32, env->map->c_dir);
+	else if (env->keys.right)
+		rot_vec(env->map->c_dir, -M_PI / 32, env->map->c_dir);
+}
+
+void	move(t_mlx *env)
+{
+	double	tmp[2];
+
+	if (env->keys.w)
+	{
+		scale_vec_to(env->map->c_dir, 0.1, tmp);
+		add_vec(env->map->c_pos, tmp, env->map->c_pos);
+	}
+	else if (env->keys.s)
+	{
+		scale_vec_to(env->map->c_dir, -0.1, tmp);
+		add_vec(env->map->c_pos, tmp, env->map->c_pos);
+	}
+	if (env->keys.a)
+	{
+		rot_vec(env->map->c_dir, M_PI / 2, tmp);
+		scale_vec_to(tmp, 0.05, tmp);
+		add_vec(env->map->c_pos, tmp, env->map->c_pos);
+	}
+	else if (env->keys.d)
+	{
+		rot_vec(env->map->c_dir, -M_PI / 2, tmp);
+		scale_vec_to(tmp, 0.05, tmp);
+		add_vec(env->map->c_pos, tmp, env->map->c_pos);
+	}
 }

@@ -79,7 +79,7 @@ t_list				*ft_lstmap(t_list *lst,
 						void *(*f)(void *), void (*del)(void *));
 char				*ft_strdup(const char *s);
 char				*ft_itoa_u(unsigned int n);
-int					ft_error(char *prog, char *msg, int ret);
+int					ft_error(char *prog, char *msg, int ret, void *to_free);
 int					ft_printf(const char *format, ...);
 int					ft_abs(int n);
 int					ft_max(int a, int b);
@@ -88,5 +88,6 @@ void				ft_swap(int *a, int *b);
 int					ft_str_isnum(const char *str);
 int					ft_sign(int n);
 signed long long	ft_atol(const char *str);
+char				*ft_strstr(char *hay, char *needle);
 
 #endif
