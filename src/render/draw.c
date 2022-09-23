@@ -3,18 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmehdevi <gmehdevi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chchao <chchao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:35:51 by gmehdevi          #+#    #+#             */
-/*   Updated: 2022/08/06 20:40:57 by gmehdevi         ###   ########.fr       */
+/*   Updated: 2022/08/07 12:08:09 by chchao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int	encode_rgb(int red, int green, int blue)
+int	det_cardinals(double wall[2][2])
 {
-	return ((red % 256) << 16 | (green % 256) << 8 | (blue % 256));
+	double	units[2][2];
+	double	a;
+	double	v[2];
+	double	tmp[2];
+
+	units[0][0] = 1;
+	units[0][1] = 0;
+	units[1][0] = 0;
+	units[1][1] = 1;
+	sub_vec(wall[0], wall[1], tmp);
+	v[0] = cos(get_angle(units[0], tmp) + M_PI_2);
+	v[1] = sin(get_angle(units[0], tmp) + M_PI_2);
+	if (ft_abs_d(dot(v, units[1])) > ft_abs_d(dot(v, units[0])))
+	{
+		if (dot(v, units[1]) > 0)
+			return (1);
+		return (0);
+	}
+	else
+	{
+		if (dot(v, units[0]) > 0)
+			return (3);
+		return (2);
+	}
+	return (0);
 }
 
 void	render_background(t_mlx *env)

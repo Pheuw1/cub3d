@@ -1,11 +1,37 @@
-NAME            = cub3d
-SRCS            = src/controls.c src/main.c src/parsing/verify.c src/parsing/parsing.c src/parsing/init_map.c src/compute/angle.c src/compute/operators.c src/compute/compute.c src/render/draw.c src/render/minimap.c src/render/render.c \
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: chchao <chchao@student.42.fr>              +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/08/07 12:30:25 by chchao            #+#    #+#              #
+#    Updated: 2022/08/07 12:44:41 by chchao           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+NAME            = 	cub3d
+
+SRCS            = 	src/controls.c \
+					src/main.c \
+					src/parsing/colors.c \
+					src/parsing/init_map.c \
+					src/parsing/verify.c \
+					src/parsing/parsing.c \
+					src/parsing/textures.c \
+					src/compute/angle.c \
+					src/compute/operators.c \
+					src/compute/compute.c \
+					src/render/draw.c \
+					src/render/minimap.c \
+					src/render/render.c 
+
 					#$(wildcard src/*.c) $(wildcard src/parsing/*.c) $(wildcard src/compute/*.c) $(wildcard src/render/*.c)
-OBJS            = ${SRCS:.c=.o}
-CC              = clang
-CFLAGS          = -Wall -Wextra -Werror
-RM              = rm -rf
-INCLUDE			= ./ 
+OBJS            = 	${SRCS:.c=.o}
+CC              = 	clang
+CFLAGS          = 	-Wall -Wextra -Werror
+RM              = 	rm -rf
+INCLUDE			= 	./ 
 all: ${NAME}
 
 %.o: %.c

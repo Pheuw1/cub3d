@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmehdevi <gmehdevi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chchao <chchao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 17:13:34 by gmehdevi          #+#    #+#             */
-/*   Updated: 2022/08/06 19:49:10 by gmehdevi         ###   ########.fr       */
+/*   Updated: 2022/08/07 13:16:08 by chchao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,61 +113,84 @@ typedef struct s_mlx
 //input
 void			rotate(t_mlx *env);
 void			move(t_mlx *env);
-int				ft_press(int keycode, t_mlx *env);
-int				ft_release(int keycode, t_mlx *env);
 
-//mlx
-void			init_keys(t_K_data *keys);
-int				exit_mlx(t_mlx *env);
-int				frame(t_mlx *env);
-int				encode_rgb(int red, int green, int blue);
-void			set_pixel(t_mlx *env, int w_x, int w_y, int color);
-void			init_map(t_mlx *env);
-
-//parsing
-void			convert_map_to_vecs(t_map *map);
-void			set_pixel(t_mlx *env, int w_x, int w_y, int color);
-int				parse_input(t_mlx *env, char *config);
-int				det_cardinals(double wall[2][2]);
-int				get_color(char *line);
-void			*open_tex(t_mlx *env, char *path, int idx);
-int				get_map(t_map *map, char *file);
-int				get_camdir_pos(t_map *map, char card, int i, int j);
-int				is_valid_map_get_sizes(t_map *map, char *file);
-int				search(t_map *map, int **vis, int x, int y);
-int				break_free(t_map *map);
-int				get_textures_colors(t_mlx *env, int fd, int count);
-char			**map_makerect(t_map *map, char *file);
-void			init_layout(t_map *map);
-int				parse_input(t_mlx *env, char *config);
-
-//render
-void			draw_col_tex(t_mlx *env, int x, int idx, double *dists);
-void			draw_map_rect(t_mlx *env, int x, int y, int size);
-void			draw_map_circle(t_mlx *env, int x, int y, int size);
-void			draw_circle(t_mlx *env, int *pos, int r, int color);
-void			draw_square(t_mlx *env, int *pos, int size, int color);
-void			map_to_screen(t_mlx *env, double a, double b, int *res);
-int				encode_rgb(int red, int green, int blue);
-void			draw_closest_wall(t_mlx *env, double *ray, int x);
-void			cast_rays(t_mlx *env);
-void			render_background(t_mlx *env);
-void			draw_map(t_mlx *env, int x, int y, int size);
-
-//math
-double			get_ord_angle(double *v1);
-double			vec_cross(double *v1, double *v2);
+/*/====compute : math=====/*/
+//angle.c
 void			rot_vec(double *v, double a, double *res);
+double			get_ord_angle(double *v1);
+double			get_abs_angle(double *v1);
+double			get_angle(double *v1, double *v2);
+void			polar_to_cart(double *v, double *res);
+
+//compute.c
+void			square_wall(double wall[][2][2], int x, int y);
+void			convert_map_to_vecs(t_map *map);
+void			scale_vec_to(double *v, double c, double *res);
+void			inter_dist(double p[2][2], double v[2][2], double *dist,
+					double *wall_x);
+int				collide(t_map *map, double size);
+
+//operators.c 
+double			vec_cross(double *v1, double *v2);
 void			sub_vec(double *v1, double *v2, double *res);
 void			add_vec(double *v1, double *v2, double *res);
 void			vec_mult(double *v, double c, double *res);
 double			dot(double *v1, double *v2);
-double			get_angle(double *v1, double *v2);
-void			scale_vec_to(double *v, double c, double *res);
-double			get_abs_angle(double *v1);
-void			inter_dist(double p[2][2], double v[2][2], double *dist,
-					double *wall_x);
-int				collide(t_map *map, double size);
+
+/*/====parsing : check map/texture/color====/*/
+//colors.c
+int				encode_rgb(int red, int green, int blue);
+int				get_color(char *line);
+
+//init_map.c
+void			init_map(t_mlx *env);
+void			init_layout(t_map *map);
+int				get_camdir_pos(t_map *map, char card, int i, int j);
+int				get_map(t_map *map, char *file);
+
+//parsing.c
+char			**fill_blank(t_map *map, char *file);
+int				parse_input(t_mlx *env, char *config);
+
+//textures.c
+int				is_empty(char *s);
+int				get_textures_colors(t_mlx *env, int fd, int count);
+void			*open_tex(t_mlx *env, char *path, int idx);
+
+//verify.c
 void			vec_equal(double *v1, double *v2);
+int				search(t_map *map, int **vis, int x, int y);
+int				is_valid_map_get_sizes(t_map *map, char *file);
+int				break_free(t_map *map);
+
+/*/====render : raycasting====/*/
+//draw.c
+int				det_cardinals(double wall[2][2]);
+void			render_background(t_mlx *env);
+void			set_pixel(t_mlx *env, int w_x, int w_y, int color);
+void			draw_col_tex(t_mlx *env, int x, int idx, double *dists);
+
+//minimap.c
+void			draw_line(t_mlx *env, int *start, int *end, int color);
+void			draw_circumf(t_mlx *env, int *pos, int r, int color);
+void			draw_rest(t_mlx *env, int x, int y, int size);
+void			draw_map_circle(t_mlx *env, int x, int y, int size);
+void			draw_map(t_mlx *env, int x, int y, int size);
+
+//render.c
+void			draw_square(t_mlx *env, int *pos, int size, int color);
+void			draw_circle(t_mlx *env, int *pos, int r, int color);
+void			draw_closest_wall(t_mlx *env, double *ray, int x);
+void			cast_rays(t_mlx *env);
+int				frame(t_mlx *env);
+
+//controls.c
+void			init_keys(t_K_data *keys);
+int				ft_press(int keycode, t_mlx *env);
+int				ft_release(int keycode, t_mlx *env);
+
+//main.c
+int				exit_mlx(t_mlx *env);
+void			*init_mlx_window(t_mlx *env, char *title);
 
 #endif

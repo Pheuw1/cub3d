@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmehdevi <gmehdevi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/05 15:35:51 by gmehdevi          #+#    #+#             */
-/*   Updated: 2022/08/06 20:39:29 by gmehdevi         ###   ########.fr       */
+/*   Created: 2022/08/07 15:09:07 by chchao            #+#    #+#             */
+/*   Updated: 2022/09/23 17:09:31 by gmehdevi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,6 @@ void	vec_equal(double *v1, double *v2)
 {
 	v1[0] = v2[0];
 	v1[1] = v2[1];
-}
-
-void	init_map(t_mlx *env)
-{
-	env->map->c_pos[0] = 0.0;
-	env->map->c_pos[1] = 0.0;
-	env->map->c_dir[0] = 0.0;
-	env->map->c_dir[1] = 0.0;
-	env->map->tex_error = 0;
-	env->map->m_y = 0;
-	env->map->n_walls = 0;
-	env->map->m_x = 0;
-	env->map->fov = M_PI_4;
-	env->map->far = 1000;
-	env->map->layout = NULL;
 }
 
 int	is_valid_map_get_sizes(t_map *map, char *file)
@@ -58,10 +43,11 @@ int	is_valid_map_get_sizes(t_map *map, char *file)
 	}
 	map->m_y++;
 	if (pos < 1 || pos > 1)
-		return (ft_error("cub3d", "invalid map format", -1, file));
+		return (ft_error("cub3d", "invalid map: must have 1 player", -1, file));
 	return (0);
 }
 
+//dfs serche
 int	search(t_map *map, int **vis, int x, int y)
 {
 	if (vis[x][y] || map->layout[x][y])
