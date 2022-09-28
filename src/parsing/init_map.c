@@ -3,32 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chchao <chchao@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gmehdevi <gmehdevi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 12:05:10 by chchao            #+#    #+#             */
-/*   Updated: 2022/08/07 15:41:28 by chchao           ###   ########.fr       */
+/*   Updated: 2022/09/28 13:27:12 by gmehdevi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	init_map(t_mlx *env)
+// curse the fiends their children too
+int	dbln(char *file)
 {
-	env->map->c_pos[0] = 0.0;
-	env->map->c_pos[1] = 0.0;
-	env->map->c_dir[0] = 0.0;
-	env->map->c_dir[1] = 0.0;
-	env->map->tex_error = 0;
-	env->map->m_y = 0;
-	env->map->n_walls = 0;
-	env->map->m_x = 0;
-	env->map->fov = M_PI_4;
-	env->map->far = 1000;
-	env->map->layout = NULL;
-	env->map->tex_data[0] = NULL;
-	env->map->tex_data[1] = NULL;
-	env->map->tex_data[2] = NULL;
-	env->map->tex_data[3] = NULL;
+	int	i;
+
+	i = 0;
+	while (file[++i])
+		if (file[i - 1] == '\n' && file[i] == '\n')
+			return (ft_error("cub3d", "map contents seperated by \\n", 1, file));
+	return (0);
 }
 
 void	init_layout(t_map *map)
@@ -90,7 +83,7 @@ int	get_map(t_map *map, char *file)
 	int		j;
 	char	**split;
 
-	if (is_valid_map_get_sizes(map, file))
+	if (is_valid_map_get_sizes(map, file) || !count_walls(file) || dbln(file))
 		return (-1);
 	split = fill_blank(map, file);
 	free(file);

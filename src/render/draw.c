@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chchao <chchao@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gmehdevi <gmehdevi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:35:51 by gmehdevi          #+#    #+#             */
-/*   Updated: 2022/08/07 12:08:09 by chchao           ###   ########.fr       */
+/*   Updated: 2022/09/28 12:45:33 by gmehdevi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	set_pixel(t_mlx *env, int w_x, int w_y, int color)
 {
 	char	*dst;
 
-	if (!env->addr || w_x > WIDTH || w_x < 0 || w_y > HEIGHT || w_y < 0)
+	if (!env->addr || w_x >= WIDTH || w_x < 0 || w_y >= HEIGHT || w_y < 0)
 		return ;
 	dst = env->addr + (w_y * env->size_line + w_x * (env->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
@@ -82,7 +82,7 @@ void	draw_col_tex(t_mlx *env, int x, int idx, double *dists)
 	height[1] = (int)((double)(HEIGHT) / 2 + scale / 2);
 	row = 0;
 	step = (env->map->t_w / scale);
-	while (height[0] <= height[1])
+	while (height[0] < height[1])
 	{
 		color = *((int *)(env->map->tex_data[idx])
 				+ (int)(row)*env->map->t_w + (int)(dists[1] * env->map->t_h));

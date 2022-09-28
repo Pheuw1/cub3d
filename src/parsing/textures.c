@@ -6,7 +6,7 @@
 /*   By: gmehdevi <gmehdevi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 12:29:28 by chchao            #+#    #+#             */
-/*   Updated: 2022/09/23 16:46:40 by gmehdevi         ###   ########.fr       */
+/*   Updated: 2022/09/28 13:02:54 by gmehdevi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,17 +56,17 @@ int	get_textures_colors(t_mlx *env, int fd, int count)
 	line = get_next_line(fd);
 	while (line && count < 6)
 	{
-		if (ft_strstr(line, "NO") && ++(count))
+		if (ft_strstr(line, "NO") && !env->map->tex_data[0] && ++(count))
 			env->map->textures[0] = open_tex(env, ft_strstr(line, "NO") + 2, 0);
-		else if (ft_strstr(line, "SO") && ++(count))
+		else if (ft_strstr(line, "SO") && !env->map->tex_data[1] && ++(count))
 			env->map->textures[1] = open_tex(env, ft_strstr(line, "SO") + 2, 1);
-		else if (ft_strstr(line, "WE") && ++(count))
+		else if (ft_strstr(line, "WE") && !env->map->tex_data[2] && ++(count))
 			env->map->textures[2] = open_tex(env, ft_strstr(line, "WE") + 2, 2);
-		else if (ft_strstr(line, "EA") && ++(count))
+		else if (ft_strstr(line, "EA") && !env->map->tex_data[3] && ++(count))
 			env->map->textures[3] = open_tex(env, ft_strstr(line, "EA") + 2, 3);
-		else if (ft_strstr(line, "F") && ++(count))
+		else if (ft_strstr(line, "F") && !env->map->floor && ++(count))
 			env->map->floor = get_color(ft_strstr(line, "F") + 1);
-		else if (ft_strstr(line, "C") && ++(count))
+		else if (ft_strstr(line, "C") && !env->map->ceil && ++(count))
 			env->map->ceil = get_color(ft_strstr(line, "C") + 1);
 		else if (!is_empty(line))
 			return (ft_error("cub3d", "invalid config format", -1, line));

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chchao <chchao@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gmehdevi <gmehdevi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 17:13:34 by gmehdevi          #+#    #+#             */
-/*   Updated: 2022/08/07 13:16:08 by chchao           ###   ########.fr       */
+/*   Updated: 2022/09/28 12:54:53 by gmehdevi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define WIDTH 1000
 # define HEIGHT 1000
 # define K_ESCAPE 53
-# define N_WALLS 10000
+# define N_WALLS 50000
 // linux	
 # define K_W				13
 # define K_A				0
@@ -151,6 +151,7 @@ int				get_map(t_map *map, char *file);
 //parsing.c
 char			**fill_blank(t_map *map, char *file);
 int				parse_input(t_mlx *env, char *config);
+int				count_walls(char *s);
 
 //textures.c
 int				is_empty(char *s);

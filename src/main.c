@@ -3,14 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chchao <chchao@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gmehdevi <gmehdevi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 18:15:23 by gmehdevi          #+#    #+#             */
-/*   Updated: 2022/08/07 11:59:53 by chchao           ###   ########.fr       */
+/*   Updated: 2022/09/28 13:24:23 by gmehdevi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	init_map(t_mlx *env)
+{
+	env->map->ceil = 0;
+	env->map->floor = 0;
+	env->map->c_pos[0] = 0.0;
+	env->map->c_pos[1] = 0.0;
+	env->map->c_dir[0] = 0.0;
+	env->map->c_dir[1] = 0.0;
+	env->map->tex_error = 0;
+	env->map->m_y = 0;
+	env->map->n_walls = 0;
+	env->map->m_x = 0;
+	env->map->fov = M_PI_4;
+	env->map->far = 1000;
+	env->map->layout = NULL;
+	env->map->tex_data[0] = NULL;
+	env->map->tex_data[1] = NULL;
+	env->map->tex_data[2] = NULL;
+	env->map->tex_data[3] = NULL;
+}
 
 void	*init_mlx_window(t_mlx *env, char *title)
 {
@@ -54,8 +75,7 @@ int	exit_mlx(t_mlx *env)
 	while (++i < 4)
 		if (env->map->textures[i])
 			mlx_destroy_image(env->mlx, env->map->textures[i]);
-	if (env->mlx)
-		free(env->mlx);
+	system("leaks cub3d");
 	exit(0);
 }
 

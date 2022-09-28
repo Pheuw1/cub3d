@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chchao <chchao@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gmehdevi <gmehdevi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:35:51 by gmehdevi          #+#    #+#             */
-/*   Updated: 2022/08/07 15:34:58 by chchao           ###   ########.fr       */
+/*   Updated: 2022/09/28 12:45:04 by gmehdevi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	cast_rays(t_mlx *env)
 
 int	frame(t_mlx *env)
 {
-	if (!collide(env->map, 0.25))
+	if (!collide(env->map, 0.30))
 	{
 		if (env->keys.left || env->keys.right)
 			rotate(env);

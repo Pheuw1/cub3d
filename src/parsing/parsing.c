@@ -3,14 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chchao <chchao@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gmehdevi <gmehdevi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 12:05:03 by chchao            #+#    #+#             */
-/*   Updated: 2022/08/07 15:02:22 by chchao           ###   ########.fr       */
+/*   Updated: 2022/09/28 13:26:11 by gmehdevi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+int	count_walls(char *s)
+{
+	int	i;
+	int	r;
+
+	r = 0;
+	i = -1;
+	while (s[++i])
+	{
+		if (s[i] == '1')
+			r++;
+	}
+	if (!r)
+		return (ft_error("cub3d", "no walls", 0, s));
+	if ((long)r >= (long)(N_WALLS / 4) || (long)N_WALLS > (long)2147483647)
+		return (ft_error("cub3d", "too many walls for define", 0, s));
+	return (r * 4);
+}
 
 char	**fill_blank(t_map *map, char *file)
 {
@@ -57,13 +76,12 @@ int	parse_input(t_mlx *env, char *config)
 	int		fd;
 
 	if (check_extension(config))
-		return (ft_error("cube3d", "invalid config file extension", -1, NULL));
+		return (ft_error("cub3d", "invalid config file extension", -1, NULL));
 	fd = open(config, O_RDONLY);
-	if (fd < 0 || get_textures_colors(env, fd, 0) || env->map->floor < 0
-		|| env->map->ceil < 0)
-		return (ft_error("cube3d", "invalid config file", -1, NULL));
+	if (fd < 0 || get_textures_colors(env, fd, 0))
+		return (ft_error("cub3d", "invalid config file", -1, NULL));
 	if (env->map->tex_error)
-		return (ft_error("cube3d", "textures couldn't be loaded", -1, NULL));
+		return (ft_error("cub3d", "textures couldn't be loaded", -1, NULL));
 	file = NULL;
 	line = get_next_line(fd);
 	while (line)
