@@ -6,21 +6,28 @@
 /*   By: gmehdevi <gmehdevi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 12:05:10 by chchao            #+#    #+#             */
-/*   Updated: 2022/09/28 13:27:12 by gmehdevi         ###   ########.fr       */
+/*   Updated: 2022/09/28 14:46:49 by gmehdevi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
 // curse the fiends their children too
-int	dbln(char *file)
+int	dbln(t_map *map, char *f)
 {
 	int	i;
 
 	i = 0;
-	while (file[++i])
-		if (file[i - 1] == '\n' && file[i] == '\n')
-			return (ft_error("cub3d", "map contents seperated by \\n", 1, file));
+	while (f[i] && (f[i] != '0' && f[i] != '1' && f[i] != ' '))
+		i++;
+	while (f[i])
+	{
+		if (f[i] == '\n' && f[i + 1] == '\n')
+			while (f[++i])
+				if (f[i] == '0' || f[i] == '1' || f[i] == ' ')
+					return (ft_error("cub3d", "map seperated by \\n", 1, f));
+		i++;
+	}
 	return (0);
 }
 
@@ -83,13 +90,13 @@ int	get_map(t_map *map, char *file)
 	int		j;
 	char	**split;
 
-	if (is_valid_map_get_sizes(map, file) || !count_walls(file) || dbln(file))
+	if (valid_size(map, file) || m_x(map, file) || dbln(map, file) || !cw(file))
 		return (-1);
 	split = fill_blank(map, file);
 	free(file);
 	init_layout(map);
 	i = -1;
-	while (split[++i])
+	while (split && split[++i])
 	{
 		j = -1;
 		while (split[i][++j])

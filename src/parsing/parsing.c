@@ -6,13 +6,13 @@
 /*   By: gmehdevi <gmehdevi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 12:05:03 by chchao            #+#    #+#             */
-/*   Updated: 2022/09/28 13:26:11 by gmehdevi         ###   ########.fr       */
+/*   Updated: 2022/09/28 14:12:41 by gmehdevi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int	count_walls(char *s)
+int	cw(char *s)
 {
 	int	i;
 	int	r;

@@ -6,7 +6,7 @@
 /*   By: gmehdevi <gmehdevi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 15:09:07 by chchao            #+#    #+#             */
-/*   Updated: 2022/09/28 13:09:46 by gmehdevi         ###   ########.fr       */
+/*   Updated: 2022/09/28 14:33:50 by gmehdevi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,25 @@ void	vec_equal(double *v1, double *v2)
 	v1[1] = v2[1];
 }
 
-int	is_valid_map_get_sizes(t_map *map, char *file)
+int	m_x(t_map *map, char *file)
+{
+	char	**split;
+	int		i;
+
+	i = -1;
+	split = ft_split(file, "/n");
+	if (!split)
+	{
+		ft_freepp((void *)split);
+		return (ft_error("cub3d", "malloc failed", -1, NULL));
+	}
+	while (split[++i])
+		map->m_x = ft_max(ft_strlen(split[i]), map->m_x);
+	ft_freepp((void *)split);
+	return (0);
+}
+
+int	valid_size(t_map *map, char *file)
 {
 	int	i;
 	int	len;

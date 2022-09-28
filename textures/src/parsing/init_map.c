@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chchao <chchao@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gmehdevi <gmehdevi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 12:05:10 by chchao            #+#    #+#             */
-/*   Updated: 2022/08/07 15:41:28 by chchao           ###   ########.fr       */
+/*   Updated: 2022/09/28 14:29:37 by gmehdevi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	get_map(t_map *map, char *file)
 	int		j;
 	char	**split;
 
-	if (is_valid_map_get_sizes(map, file))
+	if (valid_size(map, file))
 		return (-1);
 	split = fill_blank(map, file);
 	free(file);

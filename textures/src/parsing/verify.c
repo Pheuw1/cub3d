@@ -6,7 +6,7 @@
 /*   By: gmehdevi <gmehdevi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 15:09:07 by chchao            #+#    #+#             */
-/*   Updated: 2022/09/23 17:09:31 by gmehdevi         ###   ########.fr       */
+/*   Updated: 2022/09/28 14:29:37 by gmehdevi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	vec_equal(double *v1, double *v2)
 	v1[1] = v2[1];
 }
 
-int	is_valid_map_get_sizes(t_map *map, char *file)
+int	valid_size(t_map *map, char *file)
 {
 	int	i;
 	int	len;

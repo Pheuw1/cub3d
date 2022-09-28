@@ -6,7 +6,7 @@
 /*   By: gmehdevi <gmehdevi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 18:15:23 by gmehdevi          #+#    #+#             */
-/*   Updated: 2022/09/28 13:24:23 by gmehdevi         ###   ########.fr       */
+/*   Updated: 2022/09/28 13:59:55 by gmehdevi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ int	exit_mlx(t_mlx *env)
 	while (++i < 4)
 		if (env->map->textures[i])
 			mlx_destroy_image(env->mlx, env->map->textures[i]);
-	system("leaks cub3d");
 	exit(0);
 }
 

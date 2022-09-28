@@ -1,10 +1,10 @@
-NO   ./textures/brain_coral_block.XPM              
+NO   ./textures/brain_coral_block.XPM
 SO   ./textures/jukebox_side.XPM    
 WE   ./textures/copper_ore.XPM         
 EA   ./textures/crimson_stem_top.XPM         
 
 F   0  , 100,  200
-C     88   ,20,  1
+C   88 ,20,  1
 
           11111111111           1111111111
           10000010001    11111111000000001

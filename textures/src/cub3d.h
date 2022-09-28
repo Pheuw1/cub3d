@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chchao <chchao@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gmehdevi <gmehdevi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 17:13:34 by gmehdevi          #+#    #+#             */
-/*   Updated: 2022/08/07 13:16:08 by chchao           ###   ########.fr       */
+/*   Updated: 2022/09/28 14:29:37 by gmehdevi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,7 +160,7 @@ void			*open_tex(t_mlx *env, char *path, int idx);
 //verify.c
 void			vec_equal(double *v1, double *v2);
 int				search(t_map *map, int **vis, int x, int y);
-int				is_valid_map_get_sizes(t_map *map, char *file);
+int				valid_size(t_map *map, char *file);
 int				break_free(t_map *map);
 
 /*/====render : raycasting====/*/

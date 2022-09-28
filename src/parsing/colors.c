@@ -6,7 +6,7 @@
 /*   By: gmehdevi <gmehdevi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 12:43:16 by chchao            #+#    #+#             */
-/*   Updated: 2022/09/28 12:46:51 by gmehdevi         ###   ########.fr       */
+/*   Updated: 2022/09/28 14:10:31 by gmehdevi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	get_color(char *line)
 	else
 	{
 		ft_freepp((void *)tmp);
-		return (ft_error("cub3d", "invalid color format", -1, NULL));
+		return (ft_error("cub3d", "invalid color or malloc fail", -1, NULL));
 	}
 	if ((vals[0] < 0 || vals[0] > 255) || (vals[1] < 0 || vals[1] > 255)
 		|| (vals[2] < 0 || vals[2] > 255))
