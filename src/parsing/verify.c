@@ -6,7 +6,7 @@
 /*   By: gmehdevi <gmehdevi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 15:09:07 by chchao            #+#    #+#             */
-/*   Updated: 2022/09/28 14:33:50 by gmehdevi         ###   ########.fr       */
+/*   Updated: 2022/09/29 15:58:51 by gmehdevi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	valid_size(t_map *map, char *file)
 	}
 	map->m_y++;
 	if (pos < 1 || pos > 1)
-		return (ft_error("cub3d", "invalid map: must have 1 player", -1, file));
+		return (ft_error("cub3d", "can only 1 player in map", -1, file));
 	return (0);
 }
 
