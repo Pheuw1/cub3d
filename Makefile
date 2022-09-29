@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: chchao <chchao@student.42.fr>              +#+  +:+       +#+         #
+#    By: gmehdevi <gmehdevi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/07 12:30:25 by chchao            #+#    #+#              #
-#    Updated: 2022/08/07 12:44:41 by chchao           ###   ########.fr        #
+#    Updated: 2022/09/29 16:01:07 by gmehdevi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,6 @@ SRCS            = 	src/controls.c \
 					src/render/minimap.c \
 					src/render/render.c 
 
-					#$(wildcard src/*.c) $(wildcard src/parsing/*.c) $(wildcard src/compute/*.c) $(wildcard src/render/*.c)
 OBJS            = 	${SRCS:.c=.o}
 CC              = 	clang
 CFLAGS          = 	-Wall -Wextra -Werror
