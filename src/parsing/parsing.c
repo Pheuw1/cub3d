@@ -6,7 +6,7 @@
 /*   By: gmehdevi <gmehdevi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 12:05:03 by chchao            #+#    #+#             */
-/*   Updated: 2022/09/28 14:12:41 by gmehdevi         ###   ########.fr       */
+/*   Updated: 2022/09/30 16:36:41 by gmehdevi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,8 @@ int	parse_input(t_mlx *env, char *config)
 	if (check_extension(config))
 		return (ft_error("cub3d", "invalid config file extension", -1, NULL));
 	fd = open(config, O_RDONLY);
-	if (fd < 0 || get_textures_colors(env, fd, 0))
+	if (fd < 0 || get_textures_colors(env, fd, 0)
+		|| env->map->floor < 0 || env->map->ceil < 0)
 		return (ft_error("cub3d", "invalid config file", -1, NULL));
 	if (env->map->tex_error)
 		return (ft_error("cub3d", "textures couldn't be loaded", -1, NULL));
